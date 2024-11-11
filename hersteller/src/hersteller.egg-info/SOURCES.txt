@@ -1,0 +1,8 @@
+MANIFEST.in
+README.md
+pyproject.toml
+src/hersteller.egg-info/PKG-INFO
+src/hersteller.egg-info/SOURCES.txt
+src/hersteller.egg-info/dependency_links.txt
+src/hersteller.egg-info/requires.txt
+src/hersteller.egg-info/top_level.txt

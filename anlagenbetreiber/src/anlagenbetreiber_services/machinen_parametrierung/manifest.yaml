@@ -1,0 +1,5 @@
+fastiot-service:
+  name: machinen_parametrierung
+
+  depends-on:
+    - nats

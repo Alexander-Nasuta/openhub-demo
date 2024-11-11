@@ -1,0 +1,5 @@
+fastiot-service:
+  name: motiv_sensor
+
+  depends-on:
+    - nats

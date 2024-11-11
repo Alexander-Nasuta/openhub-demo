@@ -1,0 +1,29 @@
+# ATTENTION: Parts of this file are managed automatically!
+# This refers to build-system, project.version, tool and nuitka.
+
+
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dienstleister"
+version = "0.0.0"           # will be changed automatically
+authors = [{name = "useradmin" },]
+description = ""
+readme = "README.md"
+requires-python = "~=3.10"
+dependencies = ["fastiot>=1.1,<2"]
+
+# will be changed automatically
+[project.optional-dependencies]
+all = []
+
+# will be changed automatically
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dienstleister"]
+exclude = ["dienstleister_tests", "dienstleister_services"]

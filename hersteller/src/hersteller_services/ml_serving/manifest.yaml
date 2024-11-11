@@ -1,0 +1,5 @@
+fastiot-service:
+  name: ml_serving
+
+  depends-on:
+    - nats

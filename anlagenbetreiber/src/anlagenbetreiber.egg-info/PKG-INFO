@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: anlagenbetreiber
+Version: 0.0.0
+Author: useradmin
+Requires-Python: ~=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: fastiot<2,>=1.1
+Provides-Extra: all
+
+# anlagenbetreiber
+
+This project has just been created using the FastIoT Framework (https://github.com/FraunhoferIVV/fastiot)
+
+Go ahead and add some project description here!

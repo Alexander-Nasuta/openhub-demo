@@ -1,0 +1,8 @@
+MANIFEST.in
+README.md
+pyproject.toml
+src/anlagenbetreiber.egg-info/PKG-INFO
+src/anlagenbetreiber.egg-info/SOURCES.txt
+src/anlagenbetreiber.egg-info/dependency_links.txt
+src/anlagenbetreiber.egg-info/requires.txt
+src/anlagenbetreiber.egg-info/top_level.txt

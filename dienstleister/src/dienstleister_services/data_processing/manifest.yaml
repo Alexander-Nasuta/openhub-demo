@@ -1,0 +1,5 @@
+fastiot-service:
+  name: data_processing
+
+  depends-on:
+    - nats

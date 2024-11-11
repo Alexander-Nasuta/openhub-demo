@@ -1,0 +1,5 @@
+fastiot-service:
+  name: edc_dienstleister
+
+  depends-on:
+    - nats
