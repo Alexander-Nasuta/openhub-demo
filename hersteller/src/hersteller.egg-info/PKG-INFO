@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: hersteller
 Version: 0.0.0
 Author: useradmin
@@ -6,6 +6,14 @@ Requires-Python: ~=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: fastiot<2,>=1.1
 Provides-Extra: all
+Requires-Dist: flask; extra == "all"
+Requires-Dist: pymongo; extra == "all"
+Requires-Dist: pandas; extra == "all"
+Requires-Dist: Quart; extra == "all"
+Requires-Dist: torch; extra == "all"
+Requires-Dist: numpy; extra == "all"
+Requires-Dist: scikit-learn; extra == "all"
+Requires-Dist: mlflow; extra == "all"
 
 # hersteller
 

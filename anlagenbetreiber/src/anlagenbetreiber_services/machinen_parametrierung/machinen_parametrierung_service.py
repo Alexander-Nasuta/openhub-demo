@@ -39,7 +39,7 @@ class MachinenParametrierungService(FastIoTService):
         except Exception as e:
             self._logger.error(e)
 
-        return asyncio.sleep(5)
+        return asyncio.sleep(5*60)
 
     @staticmethod
     def generate_random_datapoint() -> dict:

@@ -10,3 +10,8 @@ nats-py==2.9.0            # via fastiot
 pydantic==1.10.18         # via fastiot
 pyyaml==6.0.2             # via fastiot
 typing-extensions==4.12.2  # via pydantic
+flask
+pymongo
+pandas
+numpy
+Quart

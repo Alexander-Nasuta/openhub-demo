@@ -2155,3 +2155,17 @@ still_to_label = [
         "Druck": 1,
     },
 ]
+
+
+if __name__ == '__main__':
+    import json
+    with open('data.json', 'w') as f:
+        json.dump(raw_data, f, indent=4)
+    print('Data written to data.json')
+
+    import pandas as pd
+    # Convert the list of dictionaries to a DataFrame
+    df = pd.DataFrame(raw_data)
+
+    # Write the DataFrame to a CSV file without row indices
+    df.to_csv('data.csv', index=False)

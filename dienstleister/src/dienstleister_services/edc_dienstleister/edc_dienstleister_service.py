@@ -14,8 +14,8 @@ from fastiot.core.core_uuid import get_uuid
 from fastiot.core.time import get_time_now
 from fastiot.msg.thing import Thing
 
-from anlagenbetreiber.logging.KIOptiPack_banner import KIOptiPack_banner
-from anlagenbetreiber.logging.wzl_banner import wzl_banner
+from dienstleister.logging.KIOptiPack_banner import KIOptiPack_banner
+from dienstleister.logging.wzl_banner import wzl_banner
 
 import requests
 

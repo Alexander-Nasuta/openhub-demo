@@ -20,7 +20,16 @@ dependencies = ["fastiot>=1.1,<2"]
 
 # will be changed automatically
 [project.optional-dependencies]
-all = []
+all = [
+    "flask",
+    "pymongo",
+    "pandas",
+    "Quart",
+    "torch",
+    "numpy",
+    "scikit-learn",
+    "mlflow",
+]
 
 # will be changed automatically
 [tool.setuptools.packages.find]
