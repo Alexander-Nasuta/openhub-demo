@@ -244,8 +244,13 @@ Below you can find the console logs of the Model Hosting Service with two exampl
 
 In this Video you can see some console logs of the running system.
 
-[Watch Video: Screencast.webm](./resources/Screencast.webm)
+Video on Youtube:
 
+[![Video ansehen](https://img.youtube.com/vi/CP15-dN5qjQ/0.jpg)](https://www.youtube.com/watch?v=CP15-dN5qjQ)
+
+
+Video on Github:
+[Watch Video: Screencast.webm](./resources/Screencast.webm)
 # Background and Related Work
 This section contains a summary of the background and related work in the field of machine learning lifecycle management and its application in the context of recycled plastic processing that did not fit into the paper due its page limit.
 We added it here for interested readers.
