@@ -4,6 +4,10 @@
 <br />
 <div align="center">
 
+  <a>
+    <img src="./resources/logo-optipack.svg" alt="Logo" height="180">
+  </a>
+
 
   <h1 align="center">
      Machine Learning Lifecycle Management Using Dataspaces for Optimized Machine Parameterization in Recycled Plastic Packaging
@@ -34,8 +38,44 @@ Below you can find a figure of the architecture of the demonstrator.
 ![Architecture](./resources/archi.png)
 
 Please have a look at the publication for more details on the architecture and the implementation. 
-This Demonstrator was orignally showcased at the [Open Hub Days 2024](https://gi.de/veranstaltung/open-hub-days) in Dresden, Germany. 
-Together with a first Version of the Dataspace Connector, which is not yet publicly available.
+This Demonstrator was originally showcased at the [Open Hub Days 2024](https://gi.de/veranstaltung/open-hub-days) in Dresden, Germany. 
+Together with a first version of the Dataspace Connector incoperated into the FastIoT System, which is not yet publicly available.
+
+# Datastructures
+
+The dataset contains labeled datapoints related to material validation processes for thermoforming equipment. Each datapoint reflects a specific use case or validation scenario, including information on the material used, equipment configuration, validation method, and outcome.
+
+Thermoforming machine manufacturers typically offer a predefined material portfolio aligned with their equipment specifications. Converters can select suitable materials based on the intended application. To ensure contractual performance targets are met, manufacturers validate the machine's efficiency using standard materials. Using alternative materials is generally at the converter's own risk. However, some manufacturers support formal validation of unapproved materials—either through practical testing on identical or comparable machines or via structured methods such as Design of Experiments (DOE). These validation processes are typically completed within one day based on prior experience.
+
+Each datapoint captures the relevant parameters and results from these validation efforts.
+
+```json
+{
+    "ListeKomponenten": ["K000055", "K000057"],  // List of materials (id or material name)
+    "Massenanteile": [0.5, 0.5],  // mass ratios of the materials (unit: g/g)
+    "Flächenanteilmodifiziert": 0,  // modified surface (unit: %)
+    "Geometrie": "Quader",  // geometry (unit: list of types)
+    "Kopfraumatmosphäre": None,  // headspace atmosphere (unit: Pa)
+    "Masse": None,  // mass (unit: g)
+    "Verpackungstyp": "Folie",  // packaging type
+    "CAD": None,  // link to CAD file
+    "RauheitRa": 0.08666666666666667,  // roughness Ra (unit: µm)
+    "RauheitRz": 0.924,  // roughness Rz (unit: µm)
+    "Trübung": 216.1,  // haze (unit: HLog)
+    "Glanz": 36.7,  // gloss (unit: GE)
+    "Dicke": 738.6666666666666,  // thickness (unit: µm)
+    "Emodul": 807.9225728004443,  // elastic modulus (unit: MPa)
+    "MaximaleZugspannung": 33.22942107172407,  // maximum tensile stress (unit: MPa)
+    "MaximaleLängenänderung": 14.57795412214027,  // maximum elongation (unit: %)
+    "Ausformung": 1,  // forming process rating  (unit: class (1 to 6))
+    "Kaltverfo": 1,  // cold forming rating (unit: class (1 to 3))
+    "Temp": 300,  // [LABEL] temperature (unit: °C) 
+    "Zeit": 12,  // [LABEL] time (unit: s)
+    "Druck": 4.33  // [LABEL] pressure (unit: bar)
+}
+```
+Temperature (`"Temp"`), time (`"Zeit"`), and pressure (`"Druck"`) are the target variables for the machine learning model.
+
 
 # Running the Demonstrator
 
@@ -44,6 +84,9 @@ Please make sure to have the following software installed on your machine:
 - Docker (for example [Docker Desktop](https://www.docker.com/products/docker-desktop))
 - MongoDB (for example [MongoDB Community Edition](https://www.mongodb.com/try/download/community))
 - Python 3.9 or higher (for example [Anaconda](https://www.anaconda.com/products/distribution))
+
+For Troubleshooting, you can check out this [setup video](https://youtu.be/WxKDhfsslRw)
+of a similar technology stack.
 
 ## Setting up MongoDB
 The demonstrator uses MongoDB as a database to store the data. 
@@ -73,15 +116,37 @@ If MongoDB is not running, you can start it by running the following command
 This username and password is used this repository to connect to the MongoDB database. If you want to use a different username and password, you need to change the corresponding Microservice.
 
 ### Clone the repository
+First, clone the repository to your local machine. You can do this by running the following command in your terminal:
 ```bash
+git clone https://github.com/Alexander-Nasuta/openhub-demo.git
 ```
 
-### Start the Microservices
+### Create a Virtual Environment (optional)
 
-You can strt
+Most Developers use a virtual environment to manage the dependencies of their projects.
+I personally use `conda` for this purpose.
+
+When using `conda`, you can create a new environment with the name 'openhub-demo' following command:
+
+```shell
+conda create -n openhub-demo python=3.11
+```
+
+Feel free to use any other name for the environment or a more recent version of python.
+Activate the environment with the following command:
+
+```shell
+conda activate openhub-demo
+```
+
+Replace `openhub-demo` with the name of your environment, if you used a different name.
+
+You can also use `venv` or `virtualenv` to create a virtual environment. In that case please refer to the respective documentation.
 
 
 ### Install the dependencies
+Next, you need to install the dependencies for each Dataspace Participant (FastIOT Project).
+
 ```bash
 pip install -r ./anlagenbetreiber/requirements.txt
 ```
@@ -124,11 +189,65 @@ cd ./anlagenbetreiber
 fiot start integration_test
 ```
 
+### Starting MLflow
+The MLflow server is used to manage the machine learning lifecycle, including experimentation, reproducibility, and deployment.
+To start the MLflow server, run the following command in your terminal:
 
+```bash
+mlflow server --host 127.0.0.1 --port 8080
+```
 
+### Starting the Microservices
+The Microservices can be started by running the `run.py` script in each directory.
+So for example for starting the MongoDB Database Service `machinen_parametrierung_service.py` run the script `./anlagenbetreiber/src/anlagenbetreiber_services/machinen_parametrierung/run.py`
 
+The Services depend on each other, so to avoid warning and error messages, please run the services in the following order:
 
+0. (make sure the Nats Broker, MongoDB, Docker, MLflow are running)
+1. MongoDB Service (`mongo_database` in `./anlagenbetreiber/src/anlagenbetreiber_services`)
+2. Dataspace Connector Service (Machine Operator) (`edc_anlagenbetreiber` in `./anlagenbetreiber/src/edc_anlagenbetreiber`)
+3. Data Processing Service (`data_processing` in `./dienstleister/src/dienstleister_services`)
+4. Dataspace Connector Service (ML Service Provider) (`edc_dienstleister` in `./anlagenbetreiber/src/anlagenbetreiber_services`)
+5. ML Model Training Service (`ml_training` in `./dienstleister/src/dienstleister_services`)
+6. ML Serving Service (`ml_serving` in `./hersteller/src/hersteller_services`)
+7. Dataspace Connector Service (Machine Manufacturer) (`edc_hersteller` in `./hersteller/src/hersteller_services`)
+8. Prediction Consuming Service (`machinen_parametrierung` in `./anlagenbetreiber/src/anlagenbetreiber_services`)
 
+### Expected Output
+Here are some Screenshots and Videos of the running System
+
+#### Database
+In MongoExplorer you can see the data that is stored in the MongoDB database.
+
+![Dataset](./resources/MongoExplorerLabeledData.PNG)
+
+#### MLFlow
+Over time you should see a bunch of runs in MLflow in the Experiments tab.
+
+![MLFlow Runs](./resources/mlflow-run-overview.PNG)
+
+The detailed view of a run looks like this:
+
+![MLFlow Run](./resources/mlflow-experiment-run.PNG)
+
+![MLFlow Run loss](./resources/mlflow-loss.PNG)
+
+The trained models will appear in the Models tab.
+
+![MLFlow Models](./resources/mlflow-model-registry.PNG)
+
+#### Console logs
+
+Below you can find the console logs of the Model Hosting Service with two example predictions.
+
+![preds](./resources/predictios.PNG)
+
+In this Video you can see some console logs of the running system.
+
+<video width="600" controls>
+  <source src="./resources/Screencast.webm" type="video/webm">
+  Your browser does not support the video html tag.
+</video>
 
 # Background and Related Work
 This section contains a summary of the background and related work in the field of machine learning lifecycle management and its application in the context of recycled plastic processing that did not fit into the paper due its page limit.
@@ -158,34 +277,6 @@ Besides the lifecycle model by <a href="#schlegel2023management">Schlegel and Sa
 Another notable extension is <a href="#huber2019dmme">Huber et al.</a>'s DMME (Data Mining Methodology for Engineering Applications), which builds upon CRISP-DM by integrating engineering-specific considerations for a more holistic approach to ML lifecycle management.
 
 Overall, it can be stated that numerous concrete implementations exist for achieving lifecycle management. Effectively realizing an ML lifecycle system corresponds to integrating elements of the process model, such as the lifecycle stages introduced by <a href="#schlegel2023management">Schlegel and Sattler</a>, into a cohesive software architecture.
-
-
-
-install 
-flask
-pymongo
-pandas
-pytorch
-numpy
-scikit-learn
-mlflow
-# Running the application
-mlflow server --host 127.0.0.1 --port 8080
-Quart
-## run MongoDB
-```bash
- sudo systemctl start mongod
- ```
-
-### create a mongo user
-in the mogodb shell
-`bash use admin`
-`bash db.createUser({ user: "fiot", pwd: "fiotdev123", roles: [ { role: "root", db: "admin" } ] })`
-
-
-## run the application
-```cd ./anlagenbetreiber```
-```fiot start integration_test```
 
 ## Literature Sources
 
@@ -258,10 +349,14 @@ in the mogodb shell
    <dd>Wirth, Rüdiger, and Hipp, Jochen (2000). “CRISP-DM: Towards a standard process model for data mining.” Proceedings of the 4th international conference on the practical applications of knowledge discovery and data mining, 1, 29–39.</dd>
 </dl>
 
+## Plans for Future Work
+In the future, we plan to implement the following features. This will result in a new Repository. This Repo will be archived.
+- Add contract negotiation: replace the current Dataspace Connector Service with a Released Version of the Eclipse Dataspace Connector
+- Sequential Release of Labelled Data: currently the hole dataset is added to the database at once. In the future, we plan to release the data in a sequential manner. That way one can observe how the trained models get better over time.
+
 ## Contact
 
 If you have any questions or feedback, feel free to contact me via [email](mailto:alexander.nasuta@wzl-iqs.rwth-aachen.de) or open an issue on repository.
-
 
 # License
 

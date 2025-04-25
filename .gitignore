@@ -24,6 +24,8 @@ mlruns/
 mlartifacts
 mlartifacts/
 
+ml-standalone/
+
 mlflow-tracking/
 mlflow-tracking/*
 
