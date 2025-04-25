@@ -244,10 +244,7 @@ Below you can find the console logs of the Model Hosting Service with two exampl
 
 In this Video you can see some console logs of the running system.
 
-<video width="600" controls>
-  <source src="./resources/Screencast.webm" type="video/webm">
-  Your browser does not support the video html tag.
-</video>
+[Watch Video: Screencast.webm](./resources/Screencast.webm)
 
 # Background and Related Work
 This section contains a summary of the background and related work in the field of machine learning lifecycle management and its application in the context of recycled plastic processing that did not fit into the paper due its page limit.
