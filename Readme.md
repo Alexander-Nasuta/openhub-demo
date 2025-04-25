@@ -360,6 +360,20 @@ In the future, we plan to implement the following features. This will result in 
 
 If you have any questions or feedback, feel free to contact me via [email](mailto:alexander.nasuta@wzl-iqs.rwth-aachen.de) or open an issue on repository.
 
+## Credits
+
+This project and the corresponding technical communication was made possible through the contributions of the following individuals:
+
+- **Alexander Nasuta**, M.Sc. – Conceptualization, Software, Writing  
+- **Sylwia Olbrych**, M.Sc. – Conceptualization, Writing  
+- **Prof. Christoph Quix** – Conceptualization, Writing  
+- **Dipl.-Ing. Tim Kaluza** – Conceptualization  
+- **Dipl.-Ing. Florian Schaller** – Data Curation  
+- **Sabrina Steinert**, M.Sc. – Conceptualization  
+- **Hans Aoyang Zhou**, M.Sc. – Writing (Review)  
+- **Dr. Anas Abdelrazaq** – Writing (Review)  
+- **Prof. Robert H. Schmitt** – Supervision, Funding Acquisition
+
 # License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
