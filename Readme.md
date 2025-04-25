@@ -375,5 +375,4 @@ This project and the corresponding technical communication was made possible thr
 - **Prof. Robert H. Schmitt** – Supervision, Funding Acquisition
 
 # License
-
 Distributed under the MIT License. See `LICENSE.txt` for more information.
