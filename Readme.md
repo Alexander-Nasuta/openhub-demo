@@ -49,7 +49,7 @@ Thermoforming machine manufacturers typically offer a predefined material portfo
 
 Each datapoint captures the relevant parameters and results from these validation efforts.
 
-```json
+```python
 {
     "ListeKomponenten": ["K000055", "K000057"],  // List of materials (id or material name)
     "Massenanteile": [0.5, 0.5],  // mass ratios of the materials (unit: g/g)
