@@ -28,7 +28,8 @@ all = [
 ]
 doc = [
     "sphinx>=8.2.0",
-    "myst-parser"
+    "myst-parser",
+    "furo"
 ]
 
 # will be changed automatically
