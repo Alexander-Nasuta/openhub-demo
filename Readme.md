@@ -1,20 +1,6 @@
-<div id="top"></div>
+![Logo](./resources/logo-optipack.svg)
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-
-  <a>
-    <img src="./resources/logo-optipack.svg" alt="Logo" height="180">
-  </a>
-
-
-  <h1 align="center">
-     Machine Learning Lifecycle Management Using Dataspaces for Optimized Machine Parameterization in Recycled Plastic Packaging
-  </h1>
-
-
-</div>
+### Machine Learning Lifecycle Management Using Dataspaces for Optimized Machine Parameterization in Recycled Plastic Packaging
 
 # About The Project 
 This project demonstrates a distributed, dataspace-enabled architecture for optimizing thermoforming machine parameters (temperature, pressure, cycle time) using machine learning. 
@@ -50,29 +36,29 @@ Thermoforming machine manufacturers typically offer a predefined material portfo
 Each datapoint captures the relevant parameters and results from these validation efforts.
 
 ```python
-{
-    "ListeKomponenten": ["K000055", "K000057"],  // List of materials (id or material name)
-    "Massenanteile": [0.5, 0.5],  // mass ratios of the materials (unit: g/g)
-    "Flächenanteilmodifiziert": 0,  // modified surface (unit: %)
-    "Geometrie": "Quader",  // geometry (unit: list of types)
-    "Kopfraumatmosphäre": None,  // headspace atmosphere (unit: Pa)
-    "Masse": None,  // mass (unit: g)
-    "Verpackungstyp": "Folie",  // packaging type
-    "CAD": None,  // link to CAD file
-    "RauheitRa": 0.08666666666666667,  // roughness Ra (unit: µm)
-    "RauheitRz": 0.924,  // roughness Rz (unit: µm)
-    "Trübung": 216.1,  // haze (unit: HLog)
-    "Glanz": 36.7,  // gloss (unit: GE)
-    "Dicke": 738.6666666666666,  // thickness (unit: µm)
-    "Emodul": 807.9225728004443,  // elastic modulus (unit: MPa)
-    "MaximaleZugspannung": 33.22942107172407,  // maximum tensile stress (unit: MPa)
-    "MaximaleLängenänderung": 14.57795412214027,  // maximum elongation (unit: %)
-    "Ausformung": 1,  // forming process rating  (unit: class (1 to 6))
-    "Kaltverfo": 1,  // cold forming rating (unit: class (1 to 3))
-    "Temp": 300,  // [LABEL] temperature (unit: °C) 
-    "Zeit": 12,  // [LABEL] time (unit: s)
-    "Druck": 4.33  // [LABEL] pressure (unit: bar)
-}
+    {
+        "ListeKomponenten": ["K000055", "K000057"], # List of materials (id or material name)
+        "Massenanteile": [0.5, 0.5],  # mass ratios of the materials (unit: g/g)
+        "Flächenanteilmodifiziert": 0,  # modified surface (unit: %)
+        "Geometrie": "Quader",  # geometry (unit: list of types)
+        "Kopfraumatmosphäre": None,  # headspace atmosphere (unit: Pa)
+        "Masse": None,  # mass (unit: g)
+        "Verpackungstyp": "Folie",  # packaging type
+        "CAD": None,  # link to CAD file
+        "RauheitRa": 0.08666666666666667,  # roughness Ra (unit: µm)
+        "RauheitRz": 0.924,  # roughness Rz (unit: µm)
+        "Trübung": 216.1,  # haze (unit: HLog)
+        "Glanz": 36.7,  # gloss (unit: GE)
+        "Dicke": 738.6666666666666,  # thickness (unit: µm)
+        "Emodul": 807.9225728004443,  # elastic modulus (unit: MPa)
+        "MaximaleZugspannung": 33.22942107172407,  # maximum tensile stress (unit: MPa)
+        "MaximaleLängenänderung": 14.57795412214027,  # maximum elongation (unit: %)
+        "Ausformung": 1,  # forming process rating  (unit: class (1 to 6))
+        "Kaltverfo": 1,  # cold forming rating (unit: class (1 to 3))
+        "Temp": 300,  # [LABEL] temperature (unit: °C) 
+        "Zeit": 12,  # [LABEL] time (unit: s)
+        "Druck": 4.33  # [LABEL] pressure (unit: bar)
+    }
 ```
 Temperature (`"Temp"`), time (`"Zeit"`), and pressure (`"Druck"`) are the target variables for the machine learning model.
 
