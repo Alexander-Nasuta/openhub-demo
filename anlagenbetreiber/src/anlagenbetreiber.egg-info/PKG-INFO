@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: anlagenbetreiber
 Version: 0.0.0
 Author: useradmin
@@ -6,6 +6,12 @@ Requires-Python: ~=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: fastiot<2,>=1.1
 Provides-Extra: all
+Requires-Dist: flask; extra == "all"
+Requires-Dist: pymongo; extra == "all"
+Requires-Dist: pandas; extra == "all"
+Requires-Dist: Quart; extra == "all"
+Provides-Extra: doc
+Requires-Dist: sphinx>=8.2.0; extra == "doc"
 
 # anlagenbetreiber
 

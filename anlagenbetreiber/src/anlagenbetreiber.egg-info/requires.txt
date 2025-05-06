@@ -1,3 +1,10 @@
 fastiot<2,>=1.1
 
 [all]
+flask
+pymongo
+pandas
+Quart
+
+[doc]
+sphinx>=8.2.0
