@@ -27,7 +27,8 @@ all = [
     "Quart"
 ]
 doc = [
-    "sphinx>=8.2.0"
+    "sphinx>=8.2.0",
+    "myst-parser"
 ]
 
 # will be changed automatically
