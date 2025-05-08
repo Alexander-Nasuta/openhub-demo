@@ -21,14 +21,29 @@ from anlagenbetreiber.ml_lifecycle_utils.ml_lifecycle_broker_facade import reque
 
 
 class MachinenParametrierungService(FastIoTService):
+    """
+    Machinen Parametrierung Service
+    """
 
     async def _start(self):
+        """
+
+        Returns
+        -------
+
+        """
         print(wzl_banner)
         print(KIOptiPack_banner)
         self._logger.info("Machinen Parametrierung Service (Anlagenbetreiber)  started.")
 
     @loop
     async def produce(self):
+        """
+
+        Returns
+        -------
+
+        """
         try:
             input_data = [self.generate_random_datapoint() for _ in range(2)]
             self._logger.info(f"Producing data: \n{pprint.pformat(input_data)}")
@@ -43,6 +58,12 @@ class MachinenParametrierungService(FastIoTService):
 
     @staticmethod
     def generate_random_datapoint() -> dict:
+        """
+
+        Returns
+        -------
+
+        """
         return {
             "ListeKomponenten": ["K000055", "K000057"],  # id or material name
             "Massenanteile": [0.75, 0.25],  # unit g/g

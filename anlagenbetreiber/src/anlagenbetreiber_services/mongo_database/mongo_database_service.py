@@ -28,6 +28,9 @@ from anlagenbetreiber.ml_lifecycle_utils.ml_lifecycle_subjects_name import DB_GE
 
 
 class MongoDatabaseService(FastIoTService):
+    """
+    MongoDB Database Service
+    """
     _db_username = 'fiot'
     _db_password = 'fiotdev123'
     _db_port = '27017'
@@ -43,6 +46,14 @@ class MongoDatabaseService(FastIoTService):
     _raw_data_collection: pymongo.synchronous.collection.Collection = None
 
     def __init__(self, *args, **kwargs):
+        """
+
+        Parameters
+        ----------
+        args
+        kwargs
+
+        """
         super().__init__(*args, **kwargs)
         connection_string = f"mongodb://{self._db_username}:{self._db_password}@{self._db_host}:{self._db_port}/?authMechanism=SCRAM-SHA-1"
         self._mongodb_client = MongoClient(connection_string)
@@ -51,12 +62,18 @@ class MongoDatabaseService(FastIoTService):
         self._labeled_data_collection = self._db[self._MONGO_LABELED_DATA_COLLECTION]
 
     async def _start(self):
+        """
+
+        """
         print(wzl_banner)
         print(KIOptiPack_banner)
         self._logger.info("MongoDatabaseService started.")
         await self.setup_labeled_dataset()
 
     async def setup_labeled_dataset(self):
+        """
+
+        """
         # check if the labeled data collection is empty
         if self._labeled_data_collection.count_documents({}) > 0:
             return
@@ -68,6 +85,9 @@ class MongoDatabaseService(FastIoTService):
 
     @reply(DB_GET_LABELED_DATASET_SUBJECT)
     async def get_labeled_dataset(self, _: str, __: Thing) -> Thing:
+        """
+
+        """
         self._logger.info("Received request to get labeled dataset.")
 
         try:
@@ -90,17 +110,13 @@ class MongoDatabaseService(FastIoTService):
         """
         Saves many raw data points to the database.
 
-        Parameters
-        ----------
-        _
-            The topic of the message. This is not used in this method.
-        msg
-            The message that contains the raw data points to be saved to the database.
-        Returns
-        -------
-        Thing
-            A Thing object that contains the result of the operation. This is either an acknowledgement or an error.
-            Acknowledgements contain the number of raw data points that were saved to the database.
+        :param _: The topic of the message. This is not used in this method.
+        :type _: str
+        :param msg: The message that contains the raw data points to be saved to the database.
+        :return: A Thing object that contains the result of the operation. This is either an acknowledgement or an error.
+                Acknowledgements contain the number of raw data points that were saved to the database.
+        :rtype: Thing
+
         """
         if not isinstance(msg.value, list):
             self._logger.error(f"Payload (the 'value' field of the msg Thing) must be of type list, "

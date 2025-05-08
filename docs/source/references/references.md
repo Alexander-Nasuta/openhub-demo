@@ -19,7 +19,7 @@ Overall, it can be stated that the integration of machine learning techniques an
 <a href="#schlegel2023management">Schlegel and Sattler</a> provide an overview of systems and platforms that support the management of ML artifacts, including datasets, models, and configurations. They establish assessment criteria and apply them to over 60 systems. Additionally, <a href="#schlegel2023management">Schlegel and Sattler</a> define a typical machine learning lifecycle with four stages: the Requirements, Data-oriented, Model-oriented, and Operations-oriented stages.  
 The Requirements Stage focuses on defining the functional and technical prerequisites of the ML model, determining the model types and data sources best suited for the given problem. The Data-oriented Stage encompasses data collection, cleaning, labeling, and feature engineering to ensure the availability of high-quality datasets for training. The Model-oriented Stage includes model selection, training, evaluation, and optimization to develop a robust ML model. Finally, the Operations Stage involves model deployment, continuous monitoring, and integration with production systems, ensuring optimal performance and reliability.
 
-![Schlegel Life Cycle Model](../../resources/schlegel.png)
+![Schlegel Life Cycle Model](../../../resources/schlegel.png)
 
 Besides the lifecycle model by <a href="#schlegel2023management">Schlegel and Sattler</a>, alternative process models for ML lifecycle management exist.  
 <a href="#wirth2000crisp">Wirth and Hipp</a> introduced CRISP-DM (Cross Industry Standard Process for Data Mining), a widely used framework that provides a structured approach to data mining and machine learning projects.  

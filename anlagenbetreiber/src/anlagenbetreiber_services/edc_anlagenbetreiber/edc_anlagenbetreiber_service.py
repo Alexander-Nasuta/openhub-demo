@@ -29,7 +29,9 @@ from anlagenbetreiber.ml_lifecycle_utils.ml_lifecycle_subjects_name import ML_ED
 
 
 class EdcAnlagenbetreiberService(FastIoTService):
-
+    """
+    EDC AnlagenbetreiberService
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = Quart(__name__)
@@ -46,17 +48,36 @@ class EdcAnlagenbetreiberService(FastIoTService):
         await self.run_app()
 
     async def get_labeled_data(self):
+        """
+        Get labeled data
+        Returns
+        -------
+
+        """
         self._logger.info("GET /edc/anlagenbetreiber/dataplane/labeled-dataset/")
         labeled_dataset: list[dict] = await request_get_labeled_dataset(fiot_service=self)
         return jsonify(labeled_dataset)
 
     async def run_app(self):
+        """
+        Test
+        """
         config = Config()
         config.bind = ["0.0.0.0:5000"]
         await serve(self.app, config)
 
     @reply(ML_EDC_SUBJECT)
     async def get_prediction(self, _: str, msg: Thing) -> Thing:
+        """
+        Gets the prediction
+
+        :param _: The topic of the message. This is not used in this method.
+        :type _: str
+        :param msg: Actual message
+        :type msg: Thing
+        :return: Thing to signal reception
+        :rtype: Thing
+        """
         self._logger.info("Received request to get prediction.")
 
         if not isinstance(msg.value, list):

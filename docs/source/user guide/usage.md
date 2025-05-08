@@ -1,6 +1,5 @@
 # Running the demonstrator
 
-
 Running the demonstrator is a bit complicated, due to its distributed nature and the use of different technologies.
 Please make sure to have the following software installed on your machine:
 - Docker (for example [Docker Desktop](https://www.docker.com/products/docker-desktop))
@@ -141,28 +140,28 @@ Here are some Screenshots and Videos of the running System
 ### Database
 In MongoExplorer you can see the data that is stored in the MongoDB database.
 
-![Dataset](../../resources/MongoExplorerLabeledData.PNG)
+![Dataset](../../../resources/MongoExplorerLabeledData.PNG)
 
 ### MLFlow
 Over time you should see a bunch of runs in MLflow in the Experiments tab.
 
-![MLFlow Runs](../../resources/mlflow-run-overview.PNG)
+![MLFlow Runs](../../../resources/mlflow-run-overview.PNG)
 
 The detailed view of a run looks like this:
 
-![MLFlow Run](../../resources/mlflow-experiment-run.PNG)
+![MLFlow Run](../../../resources/mlflow-experiment-run.PNG)
 
-![MLFlow Run loss](../../resources/mlflow-loss.PNG)
+![MLFlow Run loss](../../../resources/mlflow-loss.PNG)
 
 The trained models will appear in the Models tab.
 
-![MLFlow Models](../../resources/mlflow-model-registry.PNG)
+![MLFlow Models](../../../resources/mlflow-model-registry.PNG)
 
 ### Console logs
 
 Below you can find the console logs of the Model Hosting Service with two example predictions.
 
-![preds](../../resources/predictios.PNG)
+![preds](../../../resources/predictios.PNG)
 
 In this Video you can see some console logs of the running system.
 
@@ -172,4 +171,4 @@ Video on Youtube:
 
 
 Video on Github:
-[Watch Video: Screencast.webm](../../resources/Screencast.webm)
+[Watch Video: Screencast.webm](../../../resources/Screencast.webm)

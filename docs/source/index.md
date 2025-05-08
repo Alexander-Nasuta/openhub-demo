@@ -74,6 +74,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 :caption: 'Contents:'
 :maxdepth: 2
 
-usage
-references
+user guide/index
+code_docs/index
+references/index
 ```

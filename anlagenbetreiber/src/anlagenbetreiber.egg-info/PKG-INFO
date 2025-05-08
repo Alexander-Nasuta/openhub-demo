@@ -12,6 +12,8 @@ Requires-Dist: pandas; extra == "all"
 Requires-Dist: Quart; extra == "all"
 Provides-Extra: doc
 Requires-Dist: sphinx>=8.2.0; extra == "doc"
+Requires-Dist: myst-parser; extra == "doc"
+Requires-Dist: furo; extra == "doc"
 
 # anlagenbetreiber
 
