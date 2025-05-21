@@ -1,17 +1,39 @@
 /* Highlight autodoc class/method boxes */
 dl.class,
 dl.function,
-dl.method {
-    border: 2px solid #034e15;
+dl.method,
+dl.attribute,
+dl.data,
+dl.property {
+    border: 2px solid #0066b6;
     border-radius: 8px;
     padding: 1em;
     margin-bottom: 2em;
 }
 
-/* Optional: Change heading color for better visibility */
-dl.class > dt,
-dl.function > dt,
-dl.method > dt {
-    color: #2c3e50;
+/* Shared base styles */
+.sig {
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    font-family: monospace;
+}
+
+/* Field list (for :param:, :returns:, etc.) */
+.field-list {
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.field-name {
     font-weight: bold;
+}
+
+html[data-theme="light"] sig.sig-object {
+    background-color: #eaeaea;
+}
+
+html[data-theme="dark"] sig.sig-object {
+    background-color: #333;
 }

@@ -25,6 +25,15 @@ from dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name import DB_GET_E
 
 
 def edc_fetch_dict_list(url):
+    """
+    Fetches EDC data
+
+    :param url: URL where the data is going to be fetched
+    :type url: str
+
+    :return: The fetched data
+    :rtype: Any
+    """
     response = requests.get(url)
     response.raise_for_status()  # Raise an exception for HTTP errors
     data = response.json()  # Convert JSON response to Python data structure
@@ -32,6 +41,9 @@ def edc_fetch_dict_list(url):
 
 
 class EdcDienstleisterService(FastIoTService):
+    """
+    EDC Dienstleister Service
+    """
 
     async def _start(self):
         print(wzl_banner)
@@ -40,6 +52,15 @@ class EdcDienstleisterService(FastIoTService):
 
     @reply(DB_GET_EDC_LABELED_DATASET_SUBJECT)
     async def get_labeled_dataset(self, _: str, __: Thing) -> Thing:
+        """
+        Gets a labled dataset using :py:func:`edc_fetch_dict_list`.
+        :param _: The topic of the message. This is not used in this method.
+        :type _: str
+        :param msg: Actual message
+        :type msg: Thing
+        :return: Thing to signal reception
+        :rtype: Thing
+        """
         self._logger.info("Received request to get labeled dataset over the edc.")
 
         try:

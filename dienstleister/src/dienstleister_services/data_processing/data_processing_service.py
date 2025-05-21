@@ -25,6 +25,11 @@ from dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name import DATA_PRO
 
 
 class DataProcessingService(FastIoTService):
+    """
+    A Data Processing Service
+
+    :ivar _preprocessor: Holds the steps of the processing Pipeline
+    """
     _preprocessor = Pipeline(
         verbose=False,
         steps=[
@@ -166,6 +171,20 @@ class DataProcessingService(FastIoTService):
 
     @reply(DATA_PROCESSING_PROCESS_RAW_DATA_SUBJECT)
     async def get_labeled_dataset(self, _: str, msg: Thing) -> Thing:
+        """
+        Request a labeled dataset from the broker and \
+        returns a corresponding processed dataset
+
+        :param _: The topic of the message. This is not used in this method.
+        :type _: str
+
+        :param msg: Actual message
+        :type msg: Thing
+
+        :return: Thing to signal reception
+        :rtype: Thing
+
+        """
         self._logger.info("Received request to get labeled dataset over the edc.")
 
         if not isinstance(msg.value, list):

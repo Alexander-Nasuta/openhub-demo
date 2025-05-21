@@ -9,31 +9,18 @@ class MyDataset(Dataset):
     """
     A custom dataset for the pytorch regression service.
 
-    Attributes
-    ----------
-    df : pd.DataFrame
-        The dataframe containing the data.
-    prediction_columns : list
-        The columns to be used as prediction targets.
+    :param df: The dataframe containing the data.
+    :type df: pd.DataFrame
 
-    Methods
-    -------
-    __len__()
-        Return the length of the dataset.
-    __getitem__(idx)
-        Get an item from the dataset.
+    :param prediction_columns: The columns to be used as prediction targets.
+    :type prediction_columns: list
+
     """
 
     def __init__(self, df: pd.DataFrame, prediction_columns: list):
         """
         Initialize the dataset.
 
-        Parameters
-        ----------
-        df : pd.DataFrame
-            The dataframe containing the data.
-        prediction_columns : list
-            The columns to be used as prediction targets.
         """
         self.df = df
         self.prediction_columns = prediction_columns
@@ -42,10 +29,9 @@ class MyDataset(Dataset):
         """
         Return the length of the dataset.
 
-        Returns
-        -------
-        int
-            The length of the dataset.
+        :return: The length of the dataset.
+        :rtype: int
+
         """
         return len(self.df)
 
@@ -53,15 +39,12 @@ class MyDataset(Dataset):
         """
         Get an item from the dataset.
 
-        Parameters
-        ----------
-        idx : int
-            The index of the item.
+        :param idx: The index of the item to get.
+        :type idx: int
 
-        Returns
-        -------
-        tuple
-            The input and output data.
+        :return: The input and output data.
+        :rtype: tuple
+
         """
 
         temp = self.df.iloc[idx].copy()
@@ -79,32 +62,27 @@ class DemonstratorNeuralNet(nn.Module):
     """
     A simple neural network for demonstration purposes.
 
-    Attributes
-    ----------
-    layer_1 : torch.nn.Linear
-        The first linear layer.
-    layer_2 : torch.nn.Linear
-        The second linear layer.
-    layer_3 : torch.nn.Linear
-        The third linear layer.
+    :param input_dim: Dimension of the input layer.
+    :type input_dim: int
 
-    Methods
-    -------
-    forward(x)
-        Forward pass through the network.
+    :param hidden_dim: Dimension of the hidden layers.
+    :type hidden_dim: int
+
+    :param output_dim: Dimension of the output layer.
+    :type output_dim: int
+
+    :param args: Positional arguments passed to the superclass or internal use.
+
+    :param kwargs: Arbitrary keyword arguments, allowing \
+                   for extensibility or forwarding to the\
+                    superclass constructor or other components.
+
     """
 
     def __init__(self, input_dim, hidden_dim, output_dim, *args, **kwargs):
         """
         Initialize the network.
 
-        Parameters
-        ----------
-        input_dim
-        hidden_dim
-        output_dim
-        args
-        kwargs
         """
         super().__init__(*args, **kwargs)
         self.layer_1 = nn.Linear(input_dim, hidden_dim)
@@ -117,15 +95,11 @@ class DemonstratorNeuralNet(nn.Module):
         """
         Forward pass through the network.
 
-        Parameters
-        ----------
-        x
-            The input to the network.
+        :param x: The input to the network.
 
-        Returns
-        -------
-        torch.Tensor
-            The output of the network.
+        :return: The output of the network.
+        :rtype: torch.Tensor
+
         """
         x = torch.relu(self.layer_1(x))
         x = torch.relu(self.layer_2(x))

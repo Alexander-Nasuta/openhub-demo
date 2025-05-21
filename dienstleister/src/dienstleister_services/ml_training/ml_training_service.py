@@ -30,6 +30,16 @@ from mlflow.data.pandas_dataset import PandasDataset
 
 
 class MlTrainingService(FastIoTService):
+    """
+    ML Training Service (Dienstleister)
+
+    :param args: Positional arguments passed to the superclass or internal use.
+
+    :param kwargs: Arbitrary keyword arguments, allowing for \
+                   extensibility or forwarding to the superclass \
+                   constructor or other components.
+
+    """
 
     MLFLOW_TRACKING_URI = "http://127.0.0.1:8080"
 
@@ -37,22 +47,42 @@ class MlTrainingService(FastIoTService):
 
 
     def __init__(self, *args, **kwargs):
+        """
+        Test
+
+        """
         super().__init__(*args, **kwargs)
         mlflow.set_tracking_uri(self.MLFLOW_TRACKING_URI)
 
     async def _start(self):
+        """
+        Test
+
+        """
         print(wzl_banner)
         print(KIOptiPack_banner)
         self._logger.info("ML Training Service (Dienstleister) started.")
 
     @loop
     async def produce(self):
+        """
+        Produces a model in regular intervals using :py:func:`train_model`
+
+        """
 
         await self.train_model()
 
         return asyncio.sleep(self._training_interval)
 
     async def train_model(self, **kwargs):
+        """
+        Trains a Mlflow-tracked model
+
+        :param kwargs: Arbitrary keyword arguments, allowing for \
+                       extensibility or forwarding to the superclass \
+                       constructor or other components.
+
+        """
         self._logger.info("Training model")
 
         self._logger.info("Fetching labeled dataset from Anlagenbetreiber via EDC")

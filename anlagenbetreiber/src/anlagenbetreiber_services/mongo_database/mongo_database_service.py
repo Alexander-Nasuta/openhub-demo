@@ -30,6 +30,12 @@ from anlagenbetreiber.ml_lifecycle_utils.ml_lifecycle_subjects_name import DB_GE
 class MongoDatabaseService(FastIoTService):
     """
     MongoDB Database Service
+
+    :param args: Positional arguments passed to the superclass or internal use.
+
+    :param kwargs: Arbitrary keyword arguments, allowing for extensibility or \
+                   forwarding to the superclass constructor or other components.
+
     """
     _db_username = 'fiot'
     _db_password = 'fiotdev123'
@@ -46,15 +52,7 @@ class MongoDatabaseService(FastIoTService):
     _raw_data_collection: pymongo.synchronous.collection.Collection = None
 
     def __init__(self, *args, **kwargs):
-        """
-
-        Parameters
-        ----------
-        args
-        kwargs
-
-        """
-        super().__init__(*args, **kwargs)
+        ().__init__(*args, **kwargs)
         connection_string = f"mongodb://{self._db_username}:{self._db_password}@{self._db_host}:{self._db_port}/?authMechanism=SCRAM-SHA-1"
         self._mongodb_client = MongoClient(connection_string)
         self._db = self._mongodb_client[self._MONGO_DB]
@@ -62,9 +60,6 @@ class MongoDatabaseService(FastIoTService):
         self._labeled_data_collection = self._db[self._MONGO_LABELED_DATA_COLLECTION]
 
     async def _start(self):
-        """
-
-        """
         print(wzl_banner)
         print(KIOptiPack_banner)
         self._logger.info("MongoDatabaseService started.")
@@ -72,6 +67,7 @@ class MongoDatabaseService(FastIoTService):
 
     async def setup_labeled_dataset(self):
         """
+        Inserts a labeled dataset into the database
 
         """
         # check if the labeled data collection is empty
@@ -86,6 +82,13 @@ class MongoDatabaseService(FastIoTService):
     @reply(DB_GET_LABELED_DATASET_SUBJECT)
     async def get_labeled_dataset(self, _: str, __: Thing) -> Thing:
         """
+        Queries the database for a labeled dataset and sends it to the requesting service via the broker.
+
+        :param _: Topic of the message
+        :type _: str
+
+        :param __: Message Thing
+        :type __: Thing
 
         """
         self._logger.info("Received request to get labeled dataset.")

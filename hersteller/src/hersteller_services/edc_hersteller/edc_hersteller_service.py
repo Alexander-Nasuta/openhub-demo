@@ -26,6 +26,15 @@ from hypercorn.config import Config
 
 
 class EdcHerstellerService(FastIoTService):
+    """
+    EDC Hersteller Service
+
+    :param args: Positional arguments passed to the superclass or internal use.
+
+    :param kwargs: Arbitrary keyword arguments, allowing \
+                   for extensibility or forwarding to the\
+                    superclass constructor or other components.
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,12 +51,23 @@ class EdcHerstellerService(FastIoTService):
         await self.run_app()
 
     async def get_prediction(self):
+        """
+        Requests an EDC prediction
+
+        :return: The prediction
+        :rtype: quart.Response
+
+        """
         self._logger.info("POST /edc/hersteller/dataplane/pred/")
         data = await request.get_json()  # Access the JSON body of the POST request
         predictions = await request_get_prediction(fiot_service=self, data=data)
         return jsonify(predictions)
 
     async def run_app(self):
+        """
+        Starts the application
+
+        """
         config = Config()
         config.bind = ["0.0.0.0:5001"]
         await serve(self.app, config)

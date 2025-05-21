@@ -14,6 +14,10 @@ Requires-Dist: torch; extra == "all"
 Requires-Dist: numpy; extra == "all"
 Requires-Dist: scikit-learn; extra == "all"
 Requires-Dist: mlflow; extra == "all"
+Provides-Extra: doc
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: myst-parser; extra == "doc"
+Requires-Dist: furo; extra == "doc"
 
 # hersteller
 

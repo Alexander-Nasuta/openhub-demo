@@ -27,9 +27,7 @@ class MachinenParametrierungService(FastIoTService):
 
     async def _start(self):
         """
-
-        Returns
-        -------
+        Starts the Service
 
         """
         print(wzl_banner)
@@ -39,9 +37,7 @@ class MachinenParametrierungService(FastIoTService):
     @loop
     async def produce(self):
         """
-
-        Returns
-        -------
+        Requests an EDC prediction using the random datapoint in regular intervals
 
         """
         try:
@@ -59,9 +55,10 @@ class MachinenParametrierungService(FastIoTService):
     @staticmethod
     def generate_random_datapoint() -> dict:
         """
+        Generates a random datapoint
 
-        Returns
-        -------
+        :return: Random datapoint
+        :rtype: dict
 
         """
         return {

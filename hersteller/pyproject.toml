@@ -31,6 +31,12 @@ all = [
     "mlflow",
 ]
 
+doc = [
+    "sphinx",
+    "myst-parser",
+    "furo"
+]
+
 # will be changed automatically
 [tool.setuptools.packages.find]
 where = ["src"]

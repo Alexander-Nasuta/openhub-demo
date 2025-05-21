@@ -28,6 +28,15 @@ from hersteller.ml_lifecycle_utils.ml_lifecycle_subjects_name import ML_SERVING_
 
 
 class MlServingService(FastIoTService):
+    """
+    ML Serving Service
+
+    :param args: Positional arguments passed to the superclass or internal use.
+
+    :param kwargs: Arbitrary keyword arguments, allowing \
+                   for extensibility or forwarding to the\
+                    superclass constructor or other components.
+    """
     MLFLOW_TRACKING_URI = "http://127.0.0.1:8080"
     MODEL_URI = "models:/OpenHubDaysModel/4"
 
@@ -65,6 +74,20 @@ class MlServingService(FastIoTService):
 
     @reply(ML_SERVING_SUBJECT)
     async def get_prediction(self, _: str, msg: Thing) -> Thing:
+        """
+        Gets a prediction using :py:func:`perform_prediction` and \
+        returns it to the requesting service
+
+        :param _: The topic of the message.
+        :type _: str
+
+        :param msg: The data to be used for the prediction
+        :type msg: Thing
+
+        :return: The prediction
+        :rtype: Thing
+
+        """
         self._logger.info("Received request to get prediction.")
 
         if not isinstance(msg.value, list):
@@ -84,6 +107,16 @@ class MlServingService(FastIoTService):
         return ok_response_thing(payload=predictions, fiot_service=self)
 
     async def perform_prediction(self, data: list[dict]) -> list[dict]:
+        """
+        Performs a prediction using the model set in the ModelURI
+
+        :param data: The data used for the prediction
+        :type data: list[dict]
+
+        :return: The predictions
+        :rtype: list[dict]
+
+        """
         self._logger.info("Performing prediction")
         # Load the model
 

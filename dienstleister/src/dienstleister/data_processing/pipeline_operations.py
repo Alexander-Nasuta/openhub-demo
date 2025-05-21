@@ -16,12 +16,9 @@ class ColumnDropper(BaseEstimator, TransformerMixin):
     """
     Drop the specified columns from the DataFrame.
 
-    Methods
-    -------
-    fit(target)
-        Return self
-    transform(x: pd.DataFrame) -> pd.DataFrame
-        Drop the specified columns from the DataFrame.
+    :param target: List of columns to drop
+    :type target: list
+
     """
 
     def __init__(self, target: list):
@@ -36,10 +33,12 @@ class ColumnDropper(BaseEstimator, TransformerMixin):
         """
         Drop the specified columns from the DataFrame.
 
-        Parameters
-        ----------
-        x : pd.DataFrame
-            The DataFrame to transform.
+        :param x: The Dataframe to transform
+        :type x: pd.DataFrame
+
+        :return: The transformed Dataframe
+        :rtype: pd.DataFrame
+
         """
         return x.drop(self.target, axis=1)
 
@@ -47,12 +46,9 @@ class ColumnTypeSetter(BaseEstimator, TransformerMixin):
     """
     Set the specified columns to type float in the DataFrame.
 
-    Methods
-    -------
-    fit(target)
-        Return self
-    transform(x: pd.DataFrame) -> pd.DataFrame
-        Set the specified columns to type float in the DataFrame.
+    :param target: List of columns to set
+    :type target: list
+
     """
 
     def __init__(self, target: list):
@@ -67,38 +63,38 @@ class ColumnTypeSetter(BaseEstimator, TransformerMixin):
         """
         Set the specified columns to type float in the DataFrame.
 
-        Parameters
-        ----------
-        x : pd.DataFrame
-            The DataFrame to transform.
+        :param x: The Dataframe to transform
+        :type x: pd.DataFrame
+
+        :return: The transformed Dataframe
+        :rtype: pd.DataFrame
+
         """
         x[self.target] = x[self.target].astype(float)
         return x
+
 class OneHotEncodePd(BaseEstimator, TransformerMixin):
     """
     One-hot encode the specified column.
 
-    Methods
-    -------
-    fit(target)
-        Return self
-    transform(x: pd.DataFrame) -> pd.DataFrame
+    :param target: The column to one-hot encode.
+    :type target: list
+
+    :param prefix: The prefix to use for the one-hot encoded columns.
+    :type prefix: str
+
+    :param sep: The separator to use for the one-hot encoded columns.
+    :type sep: str
+
+    :param required_columns: A list of columns that should be present in the DataFrame after one-hot encoding.
+    :type required_columns: list
+
     """
 
     def __init__(self, target: str, prefix: str, sep: str, required_columns=None):
         """
         Initialize the OneHotEncodePd object.
 
-        Parameters
-        ----------
-        target : str
-            The column to one-hot encode.
-        prefix : str
-            The prefix to use for the one-hot encoded columns.
-        sep : str
-            The separator to use for the one-hot encoded columns.
-        required_columns : list
-            A list of columns that should be present in the DataFrame after one-hot encoding.
         """
 
         if required_columns is None:
@@ -110,14 +106,7 @@ class OneHotEncodePd(BaseEstimator, TransformerMixin):
 
     def fit(self, target):
         """
-
-        Parameters
-        ----------
-        target
-
-        Returns
-        -------
-
+        Return self.
         """
         return self
 
@@ -125,13 +114,12 @@ class OneHotEncodePd(BaseEstimator, TransformerMixin):
         """
         One-hot encode the specified column.
 
-        Parameters
-        ----------
-        x
+        :param x: The Dataframe to transform
+        :type x: pd.DataFrame
 
-        Returns
-        -------
-        pd.DataFrame
+        :return: The transformed Dataframe
+        :rtype: pd.DataFrame
+
         """
         # Perform in-place one-hot encoding
         df_encoded = pd.get_dummies(x, columns=[self.target], prefix=self.prefix,
@@ -153,29 +141,26 @@ class OneHotEncodePd(BaseEstimator, TransformerMixin):
 
 class MultiOneHotEncodePd(BaseEstimator, TransformerMixin):
     """
-    One-hot encode a column containing lists of categorical values.
+    One-hot encode the specified column into multiple categorical values.
 
-    Methods
-    -------
-    fit(target)
-        Return self
-    transform(x: pd.DataFrame) -> pd.DataFrame
+    :param target: The column to one-hot encode.
+    :type target: list
+
+    :param prefix: The prefix to use for the one-hot encoded columns.
+    :type prefix: str
+
+    :param sep: The separator to use for the one-hot encoded columns.
+    :type sep: str
+
+    :param required_columns: A list of columns that should be present in the DataFrame after one-hot encoding.
+    :type required_columns: list
+
     """
 
     def __init__(self, target: str, prefix: str, sep: str, required_columns=None):
         """
         Initialize the MultiOneHotEncodePd object.
 
-        Parameters
-        ----------
-        target : str
-            The column to one-hot encode.
-        prefix : str
-            The prefix to use for the one-hot encoded columns.
-        sep : str
-            The separator to use for the one-hot encoded columns.
-        required_columns : list
-            A list of columns that should be present in the DataFrame after one-hot encoding.
         """
         if required_columns is None:
             required_columns = []
@@ -192,14 +177,12 @@ class MultiOneHotEncodePd(BaseEstimator, TransformerMixin):
         """
         One-hot encode the specified column containing lists of categorical values.
 
-        Parameters
-        ----------
-        x : pd.DataFrame
-            The DataFrame to transform.
+        :param x: The Dataframe to transform
+        :type x: pd.DataFrame
 
-        Returns
-        -------
-        pd.DataFrame
+        :return: The transformed Dataframe
+        :rtype: pd.DataFrame
+
         """
         # Initialize the one-hot encoded columns with 0s
         for column in self.required_columns:
@@ -222,26 +205,21 @@ class NormalizeCols(BaseEstimator, TransformerMixin):
     """
     Normalize the specified column to the specified feature range using provided column range.
 
-    Methods
-    -------
-    fit(target)
-        Return self
-    transform(x: pd.DataFrame) -> pd.DataFrame
-        Normalize the specified column to the specified feature range.
+    :param target: The column to normalize.
+    :type target: str
+
+    :param feature_range: The desired range of the transformed data.
+    :type feature_range: tuple
+
+    :param column_range: The actual range of the column data.
+    :type column_range: tuple
+
     """
 
     def __init__(self, target: str, feature_range: tuple, column_range: tuple):
         """
         Initialize the CustomNormalizeCols object.
 
-        Parameters
-        ----------
-        target : str
-            The column to normalize.
-        feature_range : tuple
-            The desired range of the transformed data.
-        column_range : tuple
-            The actual range of the column data.
         """
         self.target = target
         self.feature_range = feature_range
@@ -255,14 +233,12 @@ class NormalizeCols(BaseEstimator, TransformerMixin):
         """
         Normalize the specified column to the specified feature range using provided column range.
 
-        Parameters
-        ----------
-        x : pd.DataFrame
-            The DataFrame to transform.
+        :param x: The Dataframe to transform
+        :type x: pd.DataFrame
 
-        Returns
-        -------
-        pd.DataFrame
+        :return: The transformed Dataframe
+        :rtype: pd.DataFrame
+
         """
         df = x.copy()  # don't modify original df
         col_min, col_max = self.column_range

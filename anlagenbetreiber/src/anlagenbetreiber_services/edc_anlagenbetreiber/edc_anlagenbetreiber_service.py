@@ -49,10 +49,9 @@ class EdcAnlagenbetreiberService(FastIoTService):
 
     async def get_labeled_data(self):
         """
-        Get labeled data
-        Returns
-        -------
-
+        Get a labeled dataset
+        :return: Labled dataset
+        :rtype: Jsonified labled dataset
         """
         self._logger.info("GET /edc/anlagenbetreiber/dataplane/labeled-dataset/")
         labeled_dataset: list[dict] = await request_get_labeled_dataset(fiot_service=self)
@@ -60,7 +59,7 @@ class EdcAnlagenbetreiberService(FastIoTService):
 
     async def run_app(self):
         """
-        Test
+        Starts the application
         """
         config = Config()
         config.bind = ["0.0.0.0:5000"]

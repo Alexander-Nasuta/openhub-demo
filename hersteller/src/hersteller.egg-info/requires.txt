@@ -9,3 +9,8 @@ torch
 numpy
 scikit-learn
 mlflow
+
+[doc]
+sphinx
+myst-parser
+furo

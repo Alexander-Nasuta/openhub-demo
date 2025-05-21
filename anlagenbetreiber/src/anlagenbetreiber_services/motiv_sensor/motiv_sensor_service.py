@@ -24,7 +24,10 @@ from anlagenbetreiber.ml_lifecycle_utils.ml_lifecycle_broker_facade import reque
 
 
 class MotivSensorService(FastIoTService):
+    """
+    Motiv Sensor Service
 
+    """
     async def _start(self):
         print(wzl_banner)
         print(KIOptiPack_banner)
@@ -32,7 +35,10 @@ class MotivSensorService(FastIoTService):
 
     @loop
     async def produce(self):
-        """ Creating some dummy data and publish it """
+        """
+        Creating some dummy data and publish it in regular intervals
+
+        """
         data = [{
             'sensor_name': f'motiv_sensor_{random.randint(1, 5)}',
             'value': random.randint(20, 30)

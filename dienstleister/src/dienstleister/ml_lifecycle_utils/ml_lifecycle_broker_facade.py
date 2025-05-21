@@ -37,6 +37,18 @@ def ok_response_thing(payload: dict | list, fiot_service: FastIoTService) -> Thi
 
 
 def error_response_thing(exception: Exception, fiot_service: FastIoTService) -> Thing:
+    """
+    Creates a Thing object with the error information and the name of the service that created it.
+
+    :param exception: The exception that was raised.
+    :type exception: Exception
+
+    :param fiot_service: The service that raised the exception.
+    :type fiot_service: FastIoTService
+
+    :return: A Thing object with the error information and the name of the service that created it.
+    :rtype: Thing
+    """
     error_info_dict = {
         "__error_occured__": True,
         "error_type": type(exception).__name__,
@@ -54,6 +66,24 @@ def error_response_thing(exception: Exception, fiot_service: FastIoTService) -> 
 async def request_replysubject_thing_wrapper(fiot_service: FastIoTService, data: dict | list[dict],
                                              subject: str, timeout: float) -> Future[
     dict | list[dict] | int | float | str | None]:
+    """
+    This function wraps the request to the broker and handles the response.
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: dict
+
+    :param subject: The subject to which the request is sent.
+    :type subject: str
+
+    :param timeout: Seconds to wait for a response.
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     if not isinstance(data, dict) and not isinstance(data, list):
         raise TypeError("The data parameter has to be a dict or a list of dicts.")
 
@@ -80,6 +110,23 @@ async def request_replysubject_thing_wrapper(fiot_service: FastIoTService, data:
 
 async def request_save_many_raw_data_points(fiot_service: FastIoTService, data: list[dict],
                                             timeout: float = 10) -> Future[dict | list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_SAVE_MANY_RAW_DATAPOINTS_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_SAVE_MANY_RAW_DATAPOINTS_SUBJECT>` \
+    subject to save raw datapoints to the database utilizing the :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     if not isinstance(data, list):
         raise TypeError("The data parameter has to be a list of dicts.")
     # asyncio.ensure_future does not work here. It has to be awaited.
@@ -93,6 +140,23 @@ async def request_save_many_raw_data_points(fiot_service: FastIoTService, data: 
 
 async def request_upsert_many_processed_data_points(fiot_service: FastIoTService, data: list[dict],
                                                     timeout: float = 10) -> Future[dict | list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_UPSERT_MANY_PROCESSED_DATAPOINTS_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_UPSERT_MANY_PROCESSED_DATAPOINTS_SUBJECT>` \
+    subject to update processed datapoints in the database utilizing the :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     if not isinstance(data, list):
         raise TypeError("The data parameter has to be a list of dicts.")
     # asyncio.ensure_future does not work here. It has to be awaited.
@@ -106,6 +170,23 @@ async def request_upsert_many_processed_data_points(fiot_service: FastIoTService
 
 async def request_get_all_raw_data_points(fiot_service: FastIoTService,
                                           timeout: float = 10) -> Future[dict | list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_ALL_RAW_DATA_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_ALL_RAW_DATA_SUBJECT>` \
+    for all raw datapoints in the database utilizing the :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data={},
@@ -116,6 +197,24 @@ async def request_get_all_raw_data_points(fiot_service: FastIoTService,
 
 async def request_get_all_processed_data_points(fiot_service: FastIoTService,
                                                 timeout: float = 10) -> Future[dict | list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_ALL_PROCESSED_DATA_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_ALL_PROCESSED_DATA_SUBJECT>` \
+    for all processed datapoints in the database utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data={},
@@ -127,6 +226,24 @@ async def request_get_all_processed_data_points(fiot_service: FastIoTService,
 # pagination requests
 async def request_get_processed_data_points_count(fiot_service: FastIoTService,
                                                   timeout: float = 10) -> Future[int]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_PROCESSED_DATA_POINTS_COUNT_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_PROCESSED_DATA_POINTS_COUNT_SUBJECT>` \
+    for the processed datapoints count in the database utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data={},
@@ -137,6 +254,24 @@ async def request_get_processed_data_points_count(fiot_service: FastIoTService,
 
 async def request_get_processed_data_points_page(fiot_service: FastIoTService, page: int = 0, page_size: int = 10,
                                                  timeout: float = 10) -> Future[list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_PROCESSED_DATA_PAGE_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_PROCESSED_DATA_PAGE_SUBJECT>` \
+    for a page of processed datapoints in the database utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data={
@@ -150,6 +285,25 @@ async def request_get_processed_data_points_page(fiot_service: FastIoTService, p
 
 async def request_get_processed_data_points_from_raw_data(fiot_service: FastIoTService, data: dict,
                                                           timeout: float = 10) -> Future[list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DATA_PROCESSING_PROCESS_RAW_DATA_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DATA_PROCESSING_PROCESS_RAW_DATA_SUBJECT>` \
+    for a set of raw data to be processed and handed back to \
+    the requesting service utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data=data,
@@ -160,6 +314,24 @@ async def request_get_processed_data_points_from_raw_data(fiot_service: FastIoTS
 
 async def request_get_prediction(fiot_service: FastIoTService, data: dict,
                                  timeout: float = 10) -> Future[list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`ML_SERVING_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.ML_SERVING_SUBJECT>` \
+    for a prediction utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data=data,
@@ -170,6 +342,24 @@ async def request_get_prediction(fiot_service: FastIoTService, data: dict,
 
 async def request_get_labeled_dataset(fiot_service: FastIoTService, data: dict = {},
                                                           timeout: float = 10) -> Future[list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_LABELED_DATASET_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_LABELED_DATASET_SUBJECT>` \
+    for a labeled dataset from the database utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data=data,
@@ -180,6 +370,24 @@ async def request_get_labeled_dataset(fiot_service: FastIoTService, data: dict =
 
 async def request_get_edc_labeled_dataset(fiot_service: FastIoTService, data: dict = {},
                                           timeout: float = 10) -> Future[list[dict]]:
+    """
+    This function sends a request to the broker under the \
+    :data:`DB_GET_EDC_LABELED_DATASET_SUBJECT <dienstleister.ml_lifecycle_utils.ml_lifecycle_subjects_name.DB_GET_EDC_LABELED_DATASET_SUBJECT>` \
+    for a labeled EDC dataset from the database utilizing the \
+    :func:`request_replysubject_thing_wrapper <dienstleister.ml_lifecycle_utils.ml_lifecycle_broker_facade.request_replysubject_thing_wrapper>`
+
+    :param fiot_service: The FastIoTService instance that is used to send the request.
+    :type fiot_service: FastIoTService
+
+    :param data: The data to be sent to the broker.
+    :type data: list[dict]
+
+    :param timeout: Seconds to wait for a response
+    :type timeout: float
+
+    :return: Future placeholder for the awaited Reply
+    :rtype: Future[dict | list[dict] | int | float | str | None]
+    """
     return await request_replysubject_thing_wrapper(
         fiot_service=fiot_service,
         data=data,
