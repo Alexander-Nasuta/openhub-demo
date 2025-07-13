@@ -24,8 +24,8 @@ python:
     - requirements: ./hersteller/requirements.txt
     - requirements: requirements_docs.txt
     - method: pip
-      path: ./hersteller/.
+      path: ./hersteller
     - method: pip
-      path: ./dienstleister/.
+      path: ./dienstleister
     - method: pip
-      path: ./anlagenbetreiber/.
+      path: ./anlagenbetreiber
