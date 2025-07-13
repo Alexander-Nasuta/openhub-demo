@@ -39,6 +39,18 @@ doc = [
 
 # will be changed automatically
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["hersteller"]
-exclude = ["hersteller_tests", "hersteller_services"]
+where = [
+    "src",
+    "src/hersteller_services",
+]
+include = [
+    "hersteller",
+    "hersteller.data_processing",
+    "hersteller.logging",
+    "hersteller.ml_lifecycle_utils",
+
+    "hersteller_services",
+    "hersteller_services.edc_hersteller",
+    "hersteller_services.ml_serving",
+]
+exclude = ["hersteller_tests"]

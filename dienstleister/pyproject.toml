@@ -40,6 +40,20 @@ doc = [
 
 # will be changed automatically
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["dienstleister"]
-exclude = ["dienstleister_tests", "dienstleister_services"]
+where = [
+    "src",
+    "src/dienstleister_services",
+]
+include = [
+    "dienstleister",
+    "dienstleister.data_processing",
+    "dienstleister.logging",
+    "dienstleister.ml_lifecycle_utils",
+    "dienstleister.ml_training",
+
+    "dienstleister_services",
+    "dienstleister_services.data_processing",
+    "dienstleister_services.edc_dienstleister",
+    "dienstleister_services.ml_training",
+]
+exclude = ["dienstleister_tests"]

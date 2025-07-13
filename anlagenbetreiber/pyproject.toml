@@ -34,6 +34,19 @@ doc = [
 
 # will be changed automatically
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["anlagenbetreiber"]
-exclude = ["anlagenbetreiber_tests", "anlagenbetreiber_services"]
+where = [
+    "src",
+    "src/anlagenbetreiber_services",
+]
+include = [
+    "anlagenbetreiber",
+    "anlagenbetreiber.dataset",
+    "anlagenbetreiber.logging",
+    "anlagenbetreiber.ml_lifecycle_utils",
+
+    "edc_anlagenbetreiber",
+    "machinen_parametrierung",
+    "mongo_database",
+    "motiv_sensor"
+]
+exclude = ["anlagenbetreiber_tests"]
