@@ -1,3 +1,10 @@
+[![Documentation Status](https://readthedocs.org/projects/openhub-demo/badge/?version=latest)](https://openhub-demo.readthedocs.io/en/latest/?badge=latest)
+
+- [openhub-demo on **Github**](https://github.com/Alexander-Nasuta/openhub-demo)
+
+- [openhub-demo **Documentation**](https://jsp-instance-utils.readthedocs.io/en/latest/)
+
+
 <div id="top"></div>
 
 <!-- PROJECT LOGO -->
