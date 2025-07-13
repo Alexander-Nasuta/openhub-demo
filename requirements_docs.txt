@@ -1,0 +1,9 @@
+sphinx
+myst-parser
+sphinx-autobuild
+torch
+mlflow
+scikit-learn
+furo
+pandoc
+typing_extensions>=4.12.0
