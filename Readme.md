@@ -2,7 +2,7 @@
 
 - [openhub-demo on **Github**](https://github.com/Alexander-Nasuta/openhub-demo)
 
-- [openhub-demo **Documentation**](https://readthedocs.org/projects/openhub-demo/badge/?version=latest)
+- [openhub-demo **Documentation**](https://openhub-demo.readthedocs.io/en/latest)
 
 
 <div id="top"></div>
